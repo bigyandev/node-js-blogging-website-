@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>home page</title>
+        <style>
+            .blog-container {
+                width: 50%;
+                height: 20%;
+                border: 3px solid black;
+                border-radius: 10px;
+                background-color: #ddd
+            }
+        </style>
+    </head>
+    <body style="margin: 20px 50px">
+    <h1 style="text-align: center">BLOOGER</h1>
+    <form action="/api/users" method="post">
+        <input type="text" name="name" value=<%= name %>  placeholder="name" style="display:block; width: 90%; margin: 5px; padding: 10px" readonly>
+        <input type="text" name="title" placeholder="title" style="display:block; width: 90%; margin: 5px; padding: 10px" required>
+        <textarea name="blog" style="display:block; height: 300px; padding: 10px; width: 90%; margin: 5px"></textarea>
+        <button type="submit" style="display:block; width: 90%; padding: 20px; width: 90%; margin: 5px">SUBMIT</button>
+    </form>
+    <% allBlogs.forEach(blog => { %>
+    <div class="blog-container"><h3><%= blog.title %></h3>
+     <p><%= blog.blog %></p>
+     <h5><%= blog.name %></h5>
+    </div>
+    <% }) %>
+    </body>
+</html>
