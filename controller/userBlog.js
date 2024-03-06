@@ -6,10 +6,8 @@ async function handleGetAllUsersBlog(req,res) {
 }
 
 async function handleCreateNewBlog(req,res) {
-    const {name,title,blog} = req.body
+    const {blog} = req.body
     await Blog.create({
-          name,
-          title,
           blog,
           createdBy: req.user._id
     })

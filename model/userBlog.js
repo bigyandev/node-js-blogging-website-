@@ -1,12 +1,6 @@
 const mongoose = require("mongoose") 
 
 const userBlogSchema = new mongoose.Schema({
-    name: {
-        type: String,
-    },
-    title: {
-        type: String,
-    },
     blog: {
         type: String
     },
