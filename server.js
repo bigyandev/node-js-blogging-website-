@@ -4,6 +4,7 @@ const path = require("path")
 const mongoose = require("mongoose")
 const { connectDb } = require("./connection")
 const cookieParser = require("cookie-parser")
+const methodOverride = require("method-override")
 
 const blogRoute = require("./route/blogRoute")
 const staticRoute = require("./route/staticRoute")
@@ -17,6 +18,7 @@ connectDb("mongodb://127.0.0.1:27017/formdata")
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
+app.use(methodOverride("_method"))
 
 //templating engine
 app.set("view engine", "ejs")

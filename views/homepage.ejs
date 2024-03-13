@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
+    <nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">BLOGGER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -24,30 +24,53 @@
                     </li>
                 </ul>
             </div>
-            </divS>
+        </div>
     </nav>
-    <div class="container">
-    <form action="/api/users" method="post">
-        <div class="form-floating">
-            <textarea class="form-control m-2 border border-black border-3" style="width: 35rem; height: 5rem" name="blog" placeholder="Leave a comment here" id="floatingTextarea2"
-                style="height: 100px"></textarea>
-            <label for="floatingTextarea2">what's on your mind?</label>
-            <button type="submit" class="btn btn-prmiary">POST</button>
-        </div>
-    </form>
-    <% allBlogs.forEach(blog=> { %>
-        <div class="blog-container">
-            <h3>
-                <%= blog.title %>
-            </h3>
-            <p>
-                <%= blog.blog %>
-            </p>
-            <h5>
-                <%= blog.name %>
-            </h5>
-        </div>
-        <% }) %>
+    <div class="container d-flex justify-content-center mb-3  flex-wrap">
+        <form action="/api/users" method="post">
+            <div class="sms">
+                <input name="title" class="form-control border border-black border-3 mb-2" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="TITLE">
+            </div>
+            <div class="form-floating position-relative">
+                <textarea class="form-control border border-black border-3 p-6" style="width: 35rem; height: 10rem"
+                    name="blog" placeholder="Leave a comment here" id="floatingTextarea2" required></textarea>
+                <label for="floatingTextarea2">what's on your mind?</label>
+                <button type="submit" class="btn btn-primary position-absolute bottom-0 end-0">POST</button>
+            </div>
+        </form>
+    </div>
+
+    <h3 class="text-center">POPULAR BLOGS</h3>
+    <div class="container d-flex justify-content-center flex-row flex-wrap gap-2" style="width: 70%">
+        <% allBlogs.forEach(blog=> { %>
+            <div class="card position-relative" style="width: 40rem;">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <%= blog.title?.toUpperCase() %>
+                    </h3>
+                    <h5 class="card-subtitle text-muted ">
+                        <% if(loggedInUser===blog.author){ %>
+                            <h3 class="text-success">ME</h3>
+                            <% } else{ %>
+                                <h3>
+                                    <%= blog.author%>
+                                </h3>
+                                <% } %>
+                    </h5>
+                    <p class="text-justify mb-6 p-3">
+                        <%= blog.blog?.slice(0,100) + "...." %>
+                    </p>
+                    <div class="d-flex justify-content-start flex-wrap gap-2">
+                        <a href=<%="/blog/" + blog._id %> class="btn btn-primary" >READ MORE</a>
+                        <a href="/api/users/<%=blog._id %>?_method=DELETE" class="btn btn-danger">DEL</a>
+                        <button class="btn btn-success">EDIT</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <% }) %>
     </div>
 </body>
 
